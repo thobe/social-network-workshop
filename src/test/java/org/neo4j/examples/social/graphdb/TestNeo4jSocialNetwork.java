@@ -2,25 +2,36 @@ package org.neo4j.examples.social.graphdb;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.neo4j.examples.social.TestUtils;
 import org.neo4j.examples.social.TheMatrix;
+import org.neo4j.examples.social.domain.SocialNetwork;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.index.IndexService;
 
+@Ignore
 public class TestNeo4jSocialNetwork extends TestUtils
 {
-    private static final String STORE_DIR = null;
+    private static final String STORE_DIR = "target/thematrix";
+    private static Neo4jSocialNetwork socialNet;
+
+    protected SocialNetwork socnet()
+    {
+        return socialNet;
+    }
 
     @BeforeClass
     public static void setupMatrixTestGraph()
     {
-        Neo4jSocialNetwork socialNet = new TestNeo4jSocialNetwork().setupTheMatrix( STORE_DIR );
+        deleteDir( STORE_DIR );
+        socialNet = new TestNeo4jSocialNetwork().setupTheMatrix( STORE_DIR );
     }
 
     @AfterClass
     public static void shutdownSocialNetwork()
     {
-
+        socialNet.shutdown();
+        socialNet = null;
     }
 
     private Neo4jSocialNetwork setupTheMatrix( String storeDir )
@@ -29,7 +40,7 @@ public class TestNeo4jSocialNetwork extends TestUtils
     }
 
     @Override
-    protected Neo4jSocialNetwork createSocialNetwork( GraphDatabaseService graphDb,
+    protected final Neo4jSocialNetwork createSocialNetwork( GraphDatabaseService graphDb,
             IndexService indexes )
     {
         return new Neo4jSocialNetwork( graphDb, indexes );

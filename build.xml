@@ -46,12 +46,14 @@
   <target name="compile" depends="dependencies">
     <mkdir dir="${target.classes}"/>
     <javac srcdir="${main.src}" destdir="${target.classes}"
-           classpathref="dependencies.path"/>
+           classpathref="dependencies.path" debug="true"
+           debuglevel="lines,vars,source"/>
   </target>
 
   <target name="compile tests" depends="compile">
     <mkdir dir="${target.test}"/>
-    <javac srcdir="${test.src}" destdir="${target.test}">    
+    <javac srcdir="${test.src}" destdir="${target.test}" debug="true"
+           debuglevel="lines,vars,source">
       <classpath>
         <path refid="dependencies.path"/>
         <pathelement location="${target.classes}"/>
@@ -69,10 +71,7 @@
         <pathelement location="${test.resources}"/>
       </classpath>
       <batchtest todir="${target.reports}">
-        <fileset dir="${test.src}">
-          <include name="**/Test*.java"/>
-          <exclude name="**/TestUtils.java"/>
-        </fileset>
+        <fileset dir="${test.src}"/>
         <formatter type="plain"/>
       </batchtest>
     </junit>

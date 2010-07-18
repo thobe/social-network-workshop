@@ -2,10 +2,12 @@ package org.neo4j.examples.social;
 
 import java.io.File;
 
+import org.junit.Ignore;
 import org.neo4j.examples.social.graphdb.Neo4jSocialNetwork;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.index.IndexService;
 
+@Ignore
 public abstract class TestUtils
 {
     public static void deleteDir( String path )
@@ -25,7 +27,7 @@ public abstract class TestUtils
         file.delete();
     }
 
-    protected Neo4jSocialNetwork socialNetworkOf( TheMatrix theMatrix )
+    protected final Neo4jSocialNetwork socialNetworkOf( TheMatrix theMatrix )
     {
         return createSocialNetwork( theMatrix.graphDb, theMatrix.indexes );
     }

@@ -11,8 +11,10 @@ import java.util.Set;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.neo4j.graphdb.Node;
 
+@Ignore
 abstract class StepTest
 {
     private static final String STORE_DIR = "target/thematrix";

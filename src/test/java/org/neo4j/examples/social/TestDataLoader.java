@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
+import java.net.URL;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +31,8 @@ public class TestDataLoader
         DataLoader loader = new Neo4jDataLoader( DB_PATH );
         try
         {
-            loader.load( new File( getClass().getResource( "/flintstones.data" ).toURI() ) );
+            URL resource = getClass().getResource( "/flintstones.data" );
+            loader.load( new File( resource.toURI() ) );
         }
         finally
         {
