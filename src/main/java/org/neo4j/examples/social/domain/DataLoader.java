@@ -57,7 +57,7 @@ public abstract class DataLoader
         FRIENDS( 2 )
         {
             @Override
-            public void apply( DataLoader loader, String[] args )
+            void apply( DataLoader loader, String[] args )
             {
                 loader.friends( args[0], args[1] );
             }
@@ -65,9 +65,16 @@ public abstract class DataLoader
         INTEREST( 2 )
         {
             @Override
-            public void apply( DataLoader loader, String[] args )
+            void apply( DataLoader loader, String[] args )
             {
                 loader.interest( args[0], args[1] );
+            }
+        },
+        PROPERTY( 3 )
+        {
+            @Override
+            void apply( DataLoader loader, String[] args )
+            {
             }
         };
         private final int argCount;

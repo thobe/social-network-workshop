@@ -1,0 +1,109 @@
+FRIENDS; Thomas Anderson; Morpheus
+FRIENDS; Thomas Anderson; Trinity
+FRIENDS; Trinity; Morpheus
+FRIENDS; Morpheus; Tank
+FRIENDS; Morpheus; Dozer
+FRIENDS; Morpheus; Apoc
+FRIENDS; Morpheus; Cypher
+FRIENDS; Morpheus; Mouse
+FRIENDS; Morpheus; Switch
+FRIENDS; Morpheus; Seraph
+FRIENDS; Morpheus; Niobe
+INTEREST; Thomas Anderson; The Truth
+INTEREST; Thomas Anderson; The future
+INTEREST; Thomas Anderson; Hacking
+INTEREST; Thomas Anderson; Eternity
+INTEREST; Trinity; Hacking
+INTEREST; Trinity; The One
+INTEREST; Morpheus; The Truth
+INTEREST; Morpheus; The One
+INTEREST; Morpheus; Zion
+INTEREST; Morpheus; Keys
+PROPERTY; Thomas Anderson; age; 29
+PROPERTY; Thomas Anderson; hacker name; Neo
+PROPERTY; Morpheus; rank; Captain
+PROPERTY; Morpheus; occupation; Total badass
+
+FRIENDS; Cypher; Apoc
+FRIENDS; Cypher; Tank
+FRIENDS; Cypher; Dozer
+FRIENDS; Cypher; Mouse
+FRIENDS; Cypher; Switch
+FRIENDS; Cypher; Agent Smith
+FRIENDS; Apoc; Tank
+FRIENDS; Apoc; Dozer
+FRIENDS; Apoc; Mouse
+FRIENDS; Apoc; Switch
+FRIENDS; Tank; Dozer
+FRIENDS; Tank; Mouse
+FRIENDS; Tank; Switch
+FRIENDS; Tank; Zee
+FRIENDS; Dozer; Mouse
+FRIENDS; Dozer; Switch
+FRIENDS; Dozer; Zee
+FRIENDS; Dozer; Kali
+FRIENDS; Mouse; Switch
+FRIENDS; Mouse; Lady in Red
+INTEREST; Cypher; Ignorance
+INTEREST; Apoc; Freedom
+INTEREST; Tank; Zion
+INTEREST; Dozer; Zion
+INTEREST; Mouse; Sex
+INTEREST; Switch; White clothes
+INTEREST; Lady in Red; Sex
+INTEREST; Lady in Red; Illuminati
+PROPERTY; Cypher; last name; Reagan
+PROPERTY; Lady in Red; version; 0.2
+PROPERTY; Lady in Red; language; Python
+PROPERTY; Tank; born; free
+PROPERTY; Dozer; born; free
+
+FRIENDS; Zee; Link
+FRIENDS; Niobe; Lock
+FRIENDS; Niobe; Ghost
+INTEREST; Kali; Love
+INTEREST; Kali; Zion
+INTEREST; Zee; Zion
+INTEREST; Zee; Love
+INTEREST; Niobe; Zion
+INTEREST; Niobe; War
+INTEREST; Lock; Zion
+INTEREST; Lock; Love
+INTEREST; Link; Zion
+INTEREST; Ghost; Zion
+
+FRIENDS; Agent Smith; Agent Brown
+FRIENDS; Agent Smith; Agent Jones
+FRIENDS; Agent Brown; Agent Jones
+INTEREST; Agent Smith; Power
+INTEREST; Agent Smith; Control
+INTEREST; Agent Smith; Annihilation of humans
+INTEREST; Agent Brown; Control
+INTEREST; Agent Jones; Control
+PROPERTY; Agent Smith; version; 1.0b
+PROPERTY; Agent Smith; language; C++
+PROPERTY; Agent Brown; version; 1.1
+PROPERTY; Agent Brown; language; C#
+PROPERTY; Agent Jones; version; 1.1
+PROPERTY; Agent Jones; language; C#
+
+FRIENDS; The Oracle; The Architect
+FRIENDS; The Oracle; Seraph
+FRIENDS; The Oracle; Spoon Boy
+FRIENDS; Merovingian; Persephone
+FRIENDS; Merovingian; The Keymaker
+FRIENDS; Merovingian; The Trainman
+INTEREST; Persephone; The One
+INTEREST; Persephone; Eternity
+INTEREST; Spoon Boy; Bending spoons
+INTEREST; The Oracle; The future
+INTEREST; The Oracle; Creation
+INTEREST; The Oracle; The One
+INTEREST; Seraph; Protection
+INTEREST; The Architect; The future
+INTEREST; The Architect; Creation
+INTEREST; The Architect; Destruction
+INTEREST; Merovingian; Destruction
+INTEREST; Merovingian; Power
+INTEREST; The Keymaker; Keys
+INTEREST; The Trainman; Control
