@@ -10,12 +10,12 @@ import org.neo4j.helpers.collection.IteratorWrapper;
 
 class FriendPathImpl implements FriendPath
 {
-    private final Neo4jSocialNetwork social;
+    private final Neo4jSocialNetwork socnet;
     private final Path path;
 
-    FriendPathImpl( Neo4jSocialNetwork social, Path path )
+    FriendPathImpl( Neo4jSocialNetwork socnet, Path path )
     {
-        this.social = social;
+        this.socnet = socnet;
         this.path = path;
         if ( path.length() < 1 )
         {
@@ -35,7 +35,7 @@ class FriendPathImpl implements FriendPath
             @Override
             protected Person underlyingObjectToObject( Node person )
             {
-                return new PersonImpl( social, person );
+                return new PersonImpl( socnet, person );
             }
         };
     }
@@ -44,16 +44,16 @@ class FriendPathImpl implements FriendPath
     public String toString()
     {
         Iterator<Node> persons = path.nodes().iterator();
-        StringBuilder result = new StringBuilder( PersonImpl.toString( persons.next() ) );
+        StringBuilder result = new StringBuilder( PersonImpl.getName( persons.next() ) );
         result.append( " is friends with " );
-        result.append( PersonImpl.toString( path.endNode() ) );
+        result.append( PersonImpl.getName( path.endNode() ) );
         Node friend = persons.next();
         String sep = " through ";
         while ( persons.hasNext() )
         {
             result.append( sep );
             sep = " and ";
-            result.append( PersonImpl.toString( friend ) );
+            result.append( PersonImpl.getName( friend ) );
             friend = persons.next();
         }
         return result.toString();

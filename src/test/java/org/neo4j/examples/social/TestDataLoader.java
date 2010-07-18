@@ -40,9 +40,9 @@ public class TestDataLoader
         SocialNetwork flintstones = new Neo4jSocialNetwork( DB_PATH );
         try
         {
-            Person fred = flintstones.lookup( "Fred Flintstone" );
+            Person fred = flintstones.lookupPerson( "Fred Flintstone" );
             assertNotNull( "could not get Fred", fred );
-            Person betty = flintstones.lookup( "Betty Rubble" );
+            Person betty = flintstones.lookupPerson( "Betty Rubble" );
             assertNotNull( "could not get Betty", betty );
             FriendPath path = fred.getPath( betty );
             assertNotNull( "could not find out how Fred and Betty know each other", path );

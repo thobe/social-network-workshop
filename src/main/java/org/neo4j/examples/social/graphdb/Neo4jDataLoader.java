@@ -1,5 +1,8 @@
 package org.neo4j.examples.social.graphdb;
 
+import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.FRIENDS;
+import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.INTERESTED_IN;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,8 +29,8 @@ public final class Neo4jDataLoader extends DataLoader
         Long id = persons.get( name );
         if ( id == null )
         {
-            id = inserter.createNode( Collections.<String, Object>singletonMap( PersonImpl.NAME,
-                    name ) );
+            id = inserter.createNode( Collections.<String, Object>singletonMap(
+                    PersonImpl.PERSON_NAME, name ) );
             persons.put( name, id );
             indexer.index( id, Neo4jSocialNetwork.PERSON, name );
         }
@@ -50,13 +53,13 @@ public final class Neo4jDataLoader extends DataLoader
     @Override
     protected void friends( String one, String other )
     {
-        inserter.createRelationship( person( one ), person( other ), SocialTypes.FRIEND, null );
+        inserter.createRelationship( person( one ), person( other ), FRIENDS, null );
     }
 
     @Override
     protected void interest( String person, String interest )
     {
-        inserter.createRelationship( person( person ), interest( interest ), SocialTypes.INTEREST,
+        inserter.createRelationship( person( person ), interest( interest ), INTERESTED_IN,
                 null );
     }
 

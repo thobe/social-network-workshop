@@ -4,6 +4,8 @@ import java.util.Collection;
 
 public interface Person
 {
+    String getName();
+
     Collection<Person> getFriends();
 
     void addFriend( Person friend );
@@ -14,5 +16,5 @@ public interface Person
 
     FriendPath getPath( Person other );
 
-    Collection<Person> recommendFriends();
+    Collection<Person> suggestFriends();
 }
