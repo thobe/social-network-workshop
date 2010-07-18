@@ -141,16 +141,16 @@ Tasks
 * Write  a traversal  for getting  the friends  of a  person,  and the
   friends of those persons.
 
-.. _TheMatrixGraph:
-
 Here is an image as an example  of what the social graph of The Matrix
 could look like, feel free to add other aspects to the graph, but keep
 in mind that the test cases that are provided for this exercise assume
 that this graph is used.
 
-.. image:: doc/matrix.png
+.. _TheMatrixGraph:
+
+.. image:: http://github.com/thobe/social-network-workshop/raw/master/doc/matrix.png
   :width: 800px
-  :target: doc/matrix.png
+  :target: http://github.com/thobe/social-network-workshop/raw/master/doc/matrix.png
 
 Getting the friends of Thomas Anderson in this graph would yield:
 
