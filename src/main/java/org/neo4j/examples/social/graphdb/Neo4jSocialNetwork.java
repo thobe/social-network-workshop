@@ -22,16 +22,29 @@ public class Neo4jSocialNetwork implements SocialNetwork
     static final String INTEREST = "interest";
     static final String NAME = PersonImpl.NAME;
     static final String PERSON = "person";
+    private static final int MAX_DEPTH = 0;
     private final GraphDatabaseService graphDb;
     private final IndexService indexes;
     private final PathFinder<Path> shortestPath;
 
-    public Neo4jSocialNetwork( GraphDatabaseService graphDb, int maxDepth )
+    public Neo4jSocialNetwork( String storeDir )
+    {
+        this( new EmbeddedGraphDatabase( storeDir ) );
+    }
+
+    private Neo4jSocialNetwork( EmbeddedGraphDatabase graphDb )
+    {
+        // Silly constructor used because Java does not allow statements before
+        // invoking another constructor.
+        this( graphDb, new LuceneIndexService( graphDb ) );
+    }
+
+    Neo4jSocialNetwork( GraphDatabaseService graphDb, IndexService indexes )
     {
         this.graphDb = graphDb;
-        this.indexes = new LuceneIndexService( graphDb );
+        this.indexes = indexes;
         this.shortestPath = GraphAlgoFactory.shortestPath( Traversal.expanderForTypes(
-                SocialTypes.FRIEND, Direction.BOTH ), maxDepth );
+                SocialTypes.FRIEND, Direction.BOTH ), MAX_DEPTH );
     }
 
     public void shutdown()

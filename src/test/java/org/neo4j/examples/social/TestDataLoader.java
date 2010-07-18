@@ -13,7 +13,6 @@ import org.neo4j.examples.social.domain.Person;
 import org.neo4j.examples.social.domain.SocialNetwork;
 import org.neo4j.examples.social.graphdb.Neo4jDataLoader;
 import org.neo4j.examples.social.graphdb.Neo4jSocialNetwork;
-import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 public class TestDataLoader
 {
@@ -38,8 +37,7 @@ public class TestDataLoader
             loader.done();
         }
 
-        SocialNetwork flintstones = new Neo4jSocialNetwork( new EmbeddedGraphDatabase(
-                DB_PATH ), 4 );
+        SocialNetwork flintstones = new Neo4jSocialNetwork( DB_PATH );
         try
         {
             Person fred = flintstones.lookup( "Fred Flintstone" );
