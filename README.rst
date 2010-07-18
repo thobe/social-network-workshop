@@ -148,7 +148,7 @@ that this graph is used.
 
 .. _TheMatrixGraph:
 
-.. image:: http://github.com/thobe/social-network-workshop/raw/master/doc/matrix.png
+.. image:: http://github.com/thobe/social-network-workshop/raw/master/doc/matrix_small.png
   :width: 800px
   :target: http://github.com/thobe/social-network-workshop/raw/master/doc/matrix.png
 
