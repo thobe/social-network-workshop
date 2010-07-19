@@ -4,15 +4,13 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.neo4j.examples.social.TestUtils;
-import org.neo4j.examples.social.TheMatrix;
+import org.neo4j.examples.social.domain.DataLoader;
 import org.neo4j.examples.social.domain.SocialNetwork;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.index.IndexService;
 
 @Ignore
-public class TestNeo4jSocialNetwork extends TestUtils
+public class TestNeo4jSocialNetwork
 {
-    private static final String STORE_DIR = "target/thematrix";
+    private static final String STORE_DIR = "target/socnet";
     private static Neo4jSocialNetwork socialNet;
 
     protected SocialNetwork socnet()
@@ -21,10 +19,19 @@ public class TestNeo4jSocialNetwork extends TestUtils
     }
 
     @BeforeClass
-    public static void setupMatrixTestGraph()
+    public static void setupMatrixTestGraph() throws Exception
     {
-        deleteDir( STORE_DIR );
-        socialNet = new TestNeo4jSocialNetwork().setupTheMatrix( STORE_DIR );
+        TestUtils.deleteDir( STORE_DIR );
+        DataLoader loader = new Neo4jDataLoader( STORE_DIR );
+        try
+        {
+            loader.load( TestUtils.resourceFile( "/matrix.data" ) );
+        }
+        finally
+        {
+            loader.done();
+        }
+        socialNet = new Neo4jSocialNetwork( STORE_DIR );
     }
 
     @AfterClass
@@ -32,17 +39,5 @@ public class TestNeo4jSocialNetwork extends TestUtils
     {
         socialNet.shutdown();
         socialNet = null;
-    }
-
-    private Neo4jSocialNetwork setupTheMatrix( String storeDir )
-    {
-        return socialNetworkOf( new TheMatrix( storeDir ) );
-    }
-
-    @Override
-    protected final Neo4jSocialNetwork createSocialNetwork( GraphDatabaseService graphDb,
-            IndexService indexes )
-    {
-        return new Neo4jSocialNetwork( graphDb, indexes );
     }
 }

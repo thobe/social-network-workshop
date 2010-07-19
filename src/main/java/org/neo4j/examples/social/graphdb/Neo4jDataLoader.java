@@ -32,7 +32,7 @@ public final class Neo4jDataLoader extends DataLoader
             id = inserter.createNode( Collections.<String, Object>singletonMap(
                     PersonImpl.PERSON_NAME, name ) );
             persons.put( name, id );
-            indexer.index( id, Neo4jSocialNetwork.PERSON, name );
+            indexer.index( id, Neo4jSocialNetwork.PERSON_INDEX, name );
         }
         return id;
     }

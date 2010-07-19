@@ -1,15 +1,17 @@
 package org.neo4j.examples.social;
 
 import java.io.File;
+import java.net.URISyntaxException;
 
 import org.junit.Ignore;
-import org.neo4j.examples.social.graphdb.Neo4jSocialNetwork;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.index.IndexService;
 
 @Ignore
 public abstract class TestUtils
 {
+    private TestUtils()
+    {
+    }
+
     public static void deleteDir( String path )
     {
         recursiveDelete( new File( path ) );
@@ -27,11 +29,15 @@ public abstract class TestUtils
         file.delete();
     }
 
-    protected final Neo4jSocialNetwork socialNetworkOf( TheMatrix theMatrix )
+    public static File resourceFile( String name )
     {
-        return createSocialNetwork( theMatrix.graphDb, theMatrix.indexes );
+        try
+        {
+            return new File( TestUtils.class.getResource( name ).toURI() );
+        }
+        catch ( URISyntaxException e )
+        {
+            throw new RuntimeException( "JDK Failure", e );
+        }
     }
-
-    protected abstract Neo4jSocialNetwork createSocialNetwork( GraphDatabaseService graphDb,
-            IndexService indexes );
 }

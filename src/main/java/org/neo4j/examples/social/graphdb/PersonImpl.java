@@ -1,12 +1,19 @@
 package org.neo4j.examples.social.graphdb;
 
+import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.FRIENDS;
+import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.INTERESTED_IN;
+
 import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.neo4j.examples.social.domain.FriendPath;
 import org.neo4j.examples.social.domain.Person;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.RelationshipType;
+import org.neo4j.graphdb.Transaction;
 
 class PersonImpl implements Person
 {
@@ -51,24 +58,52 @@ class PersonImpl implements Person
 
     public void addFriend( Person friend )
     {
-        // TODO: implement this in Step four
+        Node friendNode = underlyingNodeOf( friend );
+        Transaction tx = socnet.beginTx();
+        try
+        {
+            if ( createSingleRelationship( friendNode, FRIENDS ) )
+            {
+                tx.success();
+            }
+        }
+        finally
+        {
+            tx.finish();
+        }
     }
 
     public void addInterest( String interest )
     {
-        // TODO: implement this in Step four
+        Transaction tx = socnet.beginTx();
+        try
+        {
+            Node interestNode = socnet.interestNode( interest );
+            if ( createSingleRelationship( interestNode, INTERESTED_IN ) )
+            {
+                tx.success();
+            }
+        }
+        finally
+        {
+            tx.finish();
+        }
     }
 
-    public List<Person> getFriends()
+    public Collection<String> getInterests()
     {
-        // TODO: implement this in Step four
-        return Collections.emptyList();
+        List<String> interests = new LinkedList<String>();
+        for ( Relationship interest : underlyingNode.getRelationships( FRIENDS ) )
+        {
+            interests.add( (String) interest.getEndNode().getProperty( Neo4jSocialNetwork.INTEREST ) );
+        }
+        return Collections.unmodifiableCollection( interests );
     }
 
-    public List<String> getInterests()
+    public Collection<Person> getFriends()
     {
         // TODO: implement this in Step four
-        return Collections.emptyList();
+        return Collections.emptySet();
     }
 
     public FriendPath getPath( Person other )
@@ -81,5 +116,29 @@ class PersonImpl implements Person
     {
         // TODO: implement this in Step six
         return Collections.emptyList();
+    }
+
+    private Node underlyingNodeOf( Person friend )
+    {
+        if ( friend instanceof PersonImpl )
+        {
+            return ( (PersonImpl) friend ).underlyingNode;
+        }
+        else
+        {
+            throw new IllegalArgumentException(
+                    friend + " does not belong to the same social network as " + this );
+        }
+    }
+
+    private boolean createSingleRelationship( Node other, RelationshipType type )
+    {
+        Relationship newRel = underlyingNode.createRelationshipTo( other, type );
+        for ( Relationship rel : underlyingNode.getRelationships( type ) )
+        {
+            if ( rel == newRel ) continue;
+            if ( rel.getOtherNode( underlyingNode ).equals( other ) ) return false;
+        }
+        return true;
     }
 }

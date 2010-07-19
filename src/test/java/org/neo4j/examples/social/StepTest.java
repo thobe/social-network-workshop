@@ -15,7 +15,7 @@ import org.junit.Ignore;
 import org.neo4j.graphdb.Node;
 
 @Ignore
-abstract class StepTest
+public abstract class StepTest
 {
     private static final String STORE_DIR = "target/thematrix";
     private static TheMatrix theMatrix;
