@@ -93,7 +93,7 @@ class PersonImpl implements Person
     public Collection<String> getInterests()
     {
         List<String> interests = new LinkedList<String>();
-        for ( Relationship interest : underlyingNode.getRelationships( FRIENDS ) )
+        for ( Relationship interest : underlyingNode.getRelationships( INTERESTED_IN ) )
         {
             interests.add( (String) interest.getEndNode().getProperty( Neo4jSocialNetwork.INTEREST ) );
         }

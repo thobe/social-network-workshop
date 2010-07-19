@@ -57,7 +57,7 @@ public class Neo4jSocialNetwork implements SocialNetwork
                 // Check for concurrent creation
                 for ( Relationship oldRef : reference.getRelationships( type, Direction.OUTGOING ) )
                 {
-                    if ( oldRef == newRef ) continue;
+                    if ( oldRef.equals( newRef ) ) continue;
                     ref = oldRef;
                 }
                 if ( ref == null )
