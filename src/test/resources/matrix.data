@@ -12,9 +12,9 @@ FRIENDS; Morpheus; Niobe
 INTEREST; Thomas Anderson; The Truth
 INTEREST; Thomas Anderson; The future
 INTEREST; Thomas Anderson; Hacking
-INTEREST; Thomas Anderson; Eternity
+INTEREST; Thomas Anderson; Understanding
 INTEREST; Trinity; Hacking
-INTEREST; Trinity; The One
+INTEREST; Trinity; Thomas Anderson
 INTEREST; Morpheus; The Truth
 INTEREST; Morpheus; The One
 INTEREST; Morpheus; Zion
@@ -45,10 +45,15 @@ FRIENDS; Dozer; Kali
 FRIENDS; Mouse; Switch
 FRIENDS; Mouse; Lady in Red
 INTEREST; Cypher; Ignorance
+INTEREST; Cypher; Freedom
 INTEREST; Apoc; Freedom
+INTEREST; Tank; Freedom
 INTEREST; Tank; Zion
+INTEREST; Dozer; Freedom
 INTEREST; Dozer; Zion
 INTEREST; Mouse; Sex
+INTEREST; Mouse; Freedom
+INTEREST; Switch; Freedom
 INTEREST; Switch; White clothes
 INTEREST; Lady in Red; Sex
 INTEREST; Lady in Red; Illuminati
@@ -66,9 +71,10 @@ INTEREST; Kali; Zion
 INTEREST; Zee; Zion
 INTEREST; Zee; Love
 INTEREST; Niobe; Zion
+INTEREST; Niobe; Love
 INTEREST; Niobe; War
 INTEREST; Lock; Zion
-INTEREST; Lock; Love
+INTEREST; Lock; War
 INTEREST; Link; Zion
 INTEREST; Ghost; Zion
 
@@ -77,6 +83,7 @@ FRIENDS; Agent Smith; Agent Jones
 FRIENDS; Agent Brown; Agent Jones
 INTEREST; Agent Smith; Power
 INTEREST; Agent Smith; Control
+INTEREST; Agent Smith; Understanding
 INTEREST; Agent Smith; Annihilation of humans
 INTEREST; Agent Brown; Control
 INTEREST; Agent Jones; Control
@@ -93,8 +100,8 @@ FRIENDS; The Oracle; Spoon Boy
 FRIENDS; Merovingian; Persephone
 FRIENDS; Merovingian; The Keymaker
 FRIENDS; Merovingian; The Trainman
-INTEREST; Persephone; The One
-INTEREST; Persephone; Eternity
+INTEREST; Persephone; Thomas Anderson
+INTEREST; Persephone; Understanding
 INTEREST; Spoon Boy; Bending spoons
 INTEREST; The Oracle; The future
 INTEREST; The Oracle; Creation
