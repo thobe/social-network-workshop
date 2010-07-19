@@ -143,13 +143,13 @@ Tasks
 * Create a graph of the social connections in The Matrix. This
   requires implementing the following methods:
 
-  * createPersonNode( String name )
-  * makeFriends( Node person1, Node person2 )
+  * **createPersonNode( String name )**
+  * **makeFriends( Node person1, Node person2 )**
 
 * Write  a traversal  for getting  the friends  of a  person,  and the
   friends of those persons. This requires implementing:
 
-  * getFriendsOfFriends( Node person )
+  * **getFriendsOfFriends( Node person )**
 
 * Verify that the unit tests in
   `src/test/java/org/neo4j/examples/social/TestStepOne.java`_
@@ -225,8 +225,8 @@ Tasks
   same interest  nodes. For testing,  use the interests data  from the
   `graph above`_. This requires implementing the following methods:
 
-  * createInterestNode( String interest )
-  * addInterest( Node person, Node interest )
+  * **createInterestNode( String interest )**
+  * **addInterest( Node person, Node interest )**
 
 * Verify that the unit tests in
   `src/test/java/org/neo4j/examples/social/TestStepTwo.java`_
@@ -329,8 +329,8 @@ Tasks
 * Add indexing to  the Matrix graph to allow for  lookup of the people
   in the social network based on their name. This requires:
 
-  * Updating: createPersonNode( String name )
-  * Implementing: lookupPerson( String name )
+  * Updating: **createPersonNode( String name )**
+  * Implementing: **lookupPerson( String name )**
 
 * Verify that the unit tests in
   `src/test/java/org/neo4j/examples/social/TestStepThree.java`_
@@ -383,7 +383,7 @@ Tasks
   `src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`_.
 
 * Study the  implementations of the  domain interfaces for  the Social
-  Network  and  implement  the  getFriends() method  for  getting  all
+  Network and  implement the  **getFriends()** method for  getting all
   friends from a Person implementation.
 
 * Verify that the unit tests in
@@ -439,7 +439,7 @@ Tasks
   `src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`_.
 
 * Use the Neo4j  Graph Algorithms to implement searching  for paths in
-  between two people.
+  between two people in the **getPath( Person other )** method.
 
 * Verify that the unit tests in
   `src/test/java/org/neo4j/examples/social/domain/TestStepFive.java`_
@@ -466,8 +466,9 @@ Tasks
 
 * Implement  a  simple  recommendation  algorithm for  suggesting  new
   friends  to a  person  in the  social  network. The  recommendations
-  should be people in the persons extended social network that are not
-  direct friends with the person.
+  should be people with the same interests that are not direct friends
+  with the person. Implement the algorithm in the **suggestFriends()**
+  method.
 
 * Verify that the unit tests in
   `src/test/java/org/neo4j/examples/social/domain/TestStepSix.java`_
