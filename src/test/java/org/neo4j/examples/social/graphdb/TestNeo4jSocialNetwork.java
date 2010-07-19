@@ -6,6 +6,8 @@ import org.junit.Ignore;
 import org.neo4j.examples.social.TestUtils;
 import org.neo4j.examples.social.domain.DataLoader;
 import org.neo4j.examples.social.domain.SocialNetwork;
+import org.neo4j.examples.social.impl.Neo4jDataLoader;
+import org.neo4j.examples.social.impl.Neo4jSocialNetwork;
 
 @Ignore
 public class TestNeo4jSocialNetwork

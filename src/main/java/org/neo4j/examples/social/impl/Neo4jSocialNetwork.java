@@ -1,4 +1,4 @@
-package org.neo4j.examples.social.graphdb;
+package org.neo4j.examples.social.impl;
 
 import static org.neo4j.graphdb.DynamicRelationshipType.withName;
 

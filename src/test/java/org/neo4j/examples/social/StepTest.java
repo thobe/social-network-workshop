@@ -71,10 +71,6 @@ public abstract class StepTest
                 {
                     System.out.println( "Thomas Anderson is his own (transitive) friend." );
                 }
-                else
-                {
-                    System.out.println( "More friends have joined the party: " + name );
-                }
             }
             if ( --emergencyBreak == 0 ) fail( "Iteration over friends does not seem to stop" );
         }

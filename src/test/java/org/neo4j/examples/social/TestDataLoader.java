@@ -12,8 +12,8 @@ import org.neo4j.examples.social.domain.DataLoader;
 import org.neo4j.examples.social.domain.FriendPath;
 import org.neo4j.examples.social.domain.Person;
 import org.neo4j.examples.social.domain.SocialNetwork;
-import org.neo4j.examples.social.graphdb.Neo4jDataLoader;
-import org.neo4j.examples.social.graphdb.Neo4jSocialNetwork;
+import org.neo4j.examples.social.impl.Neo4jDataLoader;
+import org.neo4j.examples.social.impl.Neo4jSocialNetwork;
 
 public class TestDataLoader
 {

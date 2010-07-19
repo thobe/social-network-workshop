@@ -137,14 +137,32 @@ Neo4j to compute information about that social graph.
 
 Tasks
 -----
-* Create a graph of the social connections in The Matrix.
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/TheMatrix.java`_.
+
+* Create a graph of the social connections in The Matrix. This
+  requires implementing the following methods:
+
+  * createPersonNode( String name )
+  * makeFriends( Node person1, Node person2 )
+
 * Write  a traversal  for getting  the friends  of a  person,  and the
-  friends of those persons.
+  friends of those persons. This requires implementing:
+
+  * getFriendsOfFriends( Node person )
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/TestStepOne.java`_
+  passes.
+
+.. _`src/main/java/org/neo4j/examples/social/TheMatrix.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/main/java/org/neo4j/examples/social/TheMatrix.java
+.. _`src/test/java/org/neo4j/examples/social/TestStepOne.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/TestStepOne.java
+
 
 Here is an image as an example  of what the social graph of The Matrix
-could look like, feel free to add other aspects to the graph, but keep
-in mind that the test cases that are provided for this exercise assume
-that this graph is used.
+will look like:
 
 .. _TheMatrixGraph:
 
@@ -199,12 +217,24 @@ when implemented for other domains as well when using Neo4j.
 
 Tasks
 -----
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/TheMatrix.java`_.
+
 * Implement  the concept of  interests in  the social  network. Ensure
   that persons that share the same interests have relationships to the
   same interest  nodes. For testing,  use the interests data  from the
-  `graph above`_.
+  `graph above`_. This requires implementing the following methods:
+
+  * createInterestNode( String interest )
+  * addInterest( Node person, Node interest )
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/TestStepTwo.java`_
+  passes.
 
 .. _`graph above`: TheMatrixGraph_
+.. _`src/test/java/org/neo4j/examples/social/TestStepTwo.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/TestStepTwo.java
 
 
 Step Three - Introducing indexing to the social network
@@ -293,9 +323,21 @@ text representation.
 
 Tasks
 -----
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/TheMatrix.java`_.
+
 * Add indexing to  the Matrix graph to allow for  lookup of the people
-  in the social network based on their name.
-* Add indexing to the Social Network for looking up interest nodes.
+  in the social network based on their name. This requires:
+
+  * Updating: createPersonNode( String name )
+  * Implementing: lookupPerson( String name )
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/TestStepThree.java`_
+  passes.
+
+.. _`src/test/java/org/neo4j/examples/social/TestStepThree.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/TestStepThree.java
 
 
 Step Four - Introducing a domain API
@@ -337,7 +379,21 @@ social graph of The Matrix as sample data.
 
 Tasks
 -----
-* Implement the domain interfaces by delegating to Neo4j objects.
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`_.
+
+* Study the  implementations of the  domain interfaces for  the Social
+  Network  and  implement  the  getFriends() method  for  getting  all
+  friends from a Person implementation.
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/domain/TestStepFour.java`_
+  passes.
+
+.. _`src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
+.. _`src/test/java/org/neo4j/examples/social/domain/TestStepFour.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/domain/TestStepFour.java
 
 
 Step Five - Graph Algorithms
@@ -379,9 +435,19 @@ class`_.
 
 Tasks
 -----
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`_.
 
 * Use the Neo4j  Graph Algorithms to implement searching  for paths in
   between two people.
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/domain/TestStepFive.java`_
+  passes.
+
+.. _`src/test/java/org/neo4j/examples/social/domain/TestStepFive.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/domain/TestStepFive.java
+
 
 
 Step Six - Recommendations
@@ -395,7 +461,17 @@ have the same interests and recommending them to one another.
 
 Tasks
 -----
+* All code for this task is located in
+  `src/main/java/org/neo4j/examples/social/impl/PersonImpl.java`_.
+
 * Implement  a  simple  recommendation  algorithm for  suggesting  new
   friends  to a  person  in the  social  network. The  recommendations
   should be people in the persons extended social network that are not
   direct friends with the person.
+
+* Verify that the unit tests in
+  `src/test/java/org/neo4j/examples/social/domain/TestStepSix.java`_
+  passes.
+
+.. _`src/test/java/org/neo4j/examples/social/domain/TestStepSix.java`:
+   http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/domain/TestStepSix.java

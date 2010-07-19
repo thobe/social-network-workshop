@@ -59,13 +59,12 @@ public class TheMatrix
 
     /**
      * Create a representation of the social network of the movie "The Matrix".
-     * Use the RelationshipTypes from {@link SocialNetworkRelationshipTypes}.
      *
      * @return Thomas "Neo" Anderson
      */
     public Node createSocialNetwork()
     {
-        Node thomasAnderson = null; // <- this should be assigned in step one
+        final Node thomasAnderson;
         Transaction tx = graphDb.beginTx();
         // Modifications to the Neo4j graph needs to be within transactions.
         // graphDb.beginTx() starts a new transaction.
@@ -241,26 +240,33 @@ public class TheMatrix
         return thomasAnderson;
     }
 
-    private Node createPersonNode( String name )
+    /**
+     * Create a new node to represent a person. Assign the provided name to a
+     * property of the node using {@link #PERSON_NAME} as property key.
+     *
+     * In step three this method should be updated to index the person node for
+     * lookup using its name.
+     *
+     * @param name the name of the person to create a node for
+     * @return a new person node
+     */
+    public Node createPersonNode( String name )
     {
         // TODO: implement in Step 1, update in Step 3
         return null;
     }
 
-    private void makeFriends( Node person1, Node person2 )
+    /**
+     * Associate two persons as being friends with one another.
+     *
+     * Use the RelationshipTypes from {@link SocialNetworkRelationshipTypes}.
+     *
+     * @param person1 one of the persons in the friendship
+     * @param person2 one of the persons in the friendship
+     */
+    public void makeFriends( Node person1, Node person2 )
     {
-        // TODO: implement in Step 1, update in Step 3
-    }
-
-    private Node createInterestNode( String interest )
-    {
-        // TODO: implement in Step 2, update in Step 3
-        return null;
-    }
-
-    private void addInterest( Node person, Node interest )
-    {
-        // TODO: implement in Step 2, update in Step 3
+        // TODO: implement in Step 1
     }
 
     /**
@@ -272,34 +278,54 @@ public class TheMatrix
      */
     public Iterable<Node> getFriendsOfFriends( Node person )
     {
-        // TODO: recursively get the friends of the supplied person node (and
+        // TODO: implement in Step 1
+        // recursively get the friends of the supplied person node (and
         // friends of those friends, and so on...)
         return null;
+    }
+
+    /**
+     * Create a new node to represent an interest. Assign the provided
+     * identifier to a property of the node.
+     *
+     * In step three this method should be updated to index the interest node
+     * for lookup using its identifier.
+     *
+     * @param interest the identifier for the interest
+     * @return a new interest node
+     */
+    public Node createInterestNode( String interest )
+    {
+        // TODO: implement in Step 2, update in Step 3
+        return null;
+    }
+
+    /**
+     * Associate a person with an interest.
+     * 
+     * Use the RelationshipTypes from {@link SocialNetworkRelationshipTypes}.
+     * 
+     * @param person the interested person
+     * @param interest the interesting node
+     */
+    public void addInterest( Node person, Node interest )
+    {
+        // TODO: implement in Step 2
     }
 
     /**
      * Use the index service to retrieve a person. Return null if no person
      * exists with the given name.
      *
+     * To make this method work {@link #createPersonNode(String)} needs to be
+     * updated to index the persons.
+     *
      * @param name the name of the person to retrieve
      * @return the Node representing the person with the given name
      */
     public Node lookupPerson( String name )
     {
-        // TODO: implement this in step three
-        return null;
-    }
-
-    /**
-     * Use the index service to retrieve an interest node. Return null if no
-     * interest exists with the given identifier.
-     *
-     * @param interest the identifier of the interest node to retrieve
-     * @return the Node representing the interest with the given identifier
-     */
-    public Node lookupInterest( String interest )
-    {
-        // TODO: implement this in step three
+        // TODO: implement this in Step 3
         return null;
     }
 }
