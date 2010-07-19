@@ -22,7 +22,8 @@ public class TheMatrix
     /** The name of Trinity */
     public static final String TRINITY = "Trinity";
     /** The names of the (rest of the) Nebuchadnezzar crew */
-    public static final String[] NEBUCHADNEZZAR_CREW = { "Cypher", "Apoc", "Tank", "Dozer", "Mouse" };
+    public static final String[] NEBUCHADNEZZAR_CREW = { "Cypher", "Apoc", "Tank", "Dozer",
+            "Mouse", "Switch" };
     /** The name of Agent Smith */
     public static final String AGENT_SMITH = "Agent Smith";
     /** The Property key to use for names of persons */
@@ -78,42 +79,158 @@ public class TheMatrix
         try
         {
             // Step One: Create the social graph of friends
-            Node morpheus, trinity, cypher, apoc, tank, dozer, mouse, agentSmith;
-            {
-                /* TODO: Create the social network of "The Matrix",
-                 * containing at least Thomas "Neo" Anderson, Morpheus,
-                 * Trinity, the crew of the Nebuchadnezzar (Cypher, Apoc,
-                 * Tank, Dozer and Mouse) and Agent Smith.
-                 */
-                // NOTE: also implement getFriendsOfFriends() for this step
-            }
+            thomasAnderson = createPersonNode( THOMAS_ANDERSON );
+            Node morpheus = createPersonNode( MORPHEUS );
+            Node trinity = createPersonNode( TRINITY );
+            Node agentSmith = createPersonNode( AGENT_SMITH );
+            Node agentBrown = createPersonNode( "Agent Brown" );
+            Node agentJones = createPersonNode( "Agent Jones" );
+            Node apoc = createPersonNode( "Apoc" );
+            Node cypher = createPersonNode( "Cypher" );
+            Node dozer = createPersonNode( "Dozer" );
+            Node ghost = createPersonNode( "Ghost" );
+            Node kali = createPersonNode( "Kali" );
+            Node ladyInRed = createPersonNode( "Lady in Red" );
+            Node link = createPersonNode( "Link" );
+            Node lock = createPersonNode( "Lock" );
+            Node merovingian = createPersonNode( "Merovingian" );
+            Node mouse = createPersonNode( "Mouse" );
+            Node niobe = createPersonNode( "Niobe" );
+            Node persephone = createPersonNode( "Persephone" );
+            Node seraph = createPersonNode( "Seraph" );
+            Node spoonBoy = createPersonNode( "Spoon Boy" );
+            Node _switch = createPersonNode( "Switch" );
+            Node tank = createPersonNode( "Tank" );
+            Node theArchitect = createPersonNode( "The Architect" );
+            Node theKeymaker = createPersonNode( "The Keymaker" );
+            Node theOracle = createPersonNode( "The Oracle" );
+            Node theTrainman = createPersonNode( "The Trainman" );
+            Node zee = createPersonNode( "Zee" );
+            // Connect the people as friends
+            makeFriends( thomasAnderson, morpheus );
+            makeFriends( thomasAnderson, trinity );
+            makeFriends( trinity, morpheus );
+            makeFriends( morpheus, tank );
+            makeFriends( morpheus, dozer );
+            makeFriends( morpheus, apoc );
+            makeFriends( morpheus, cypher );
+            makeFriends( morpheus, mouse );
+            makeFriends( morpheus, _switch );
+            makeFriends( morpheus, seraph );
+            makeFriends( morpheus, niobe );
+            makeFriends( cypher, apoc );
+            makeFriends( cypher, tank );
+            makeFriends( cypher, dozer );
+            makeFriends( cypher, mouse );
+            makeFriends( cypher, _switch );
+            makeFriends( cypher, agentSmith );
+            makeFriends( apoc, tank );
+            makeFriends( apoc, dozer );
+            makeFriends( apoc, mouse );
+            makeFriends( apoc, _switch );
+            makeFriends( tank, dozer );
+            makeFriends( tank, mouse );
+            makeFriends( tank, _switch );
+            makeFriends( tank, zee );
+            makeFriends( dozer, mouse );
+            makeFriends( dozer, _switch );
+            makeFriends( dozer, zee );
+            makeFriends( dozer, kali );
+            makeFriends( mouse, _switch );
+            makeFriends( mouse, ladyInRed );
+            makeFriends( zee, link );
+            makeFriends( niobe, lock );
+            makeFriends( niobe, ghost );
+            makeFriends( agentSmith, agentBrown );
+            makeFriends( agentSmith, agentJones );
+            makeFriends( agentBrown, agentJones );
+            makeFriends( theOracle, theArchitect );
+            makeFriends( theOracle, seraph );
+            makeFriends( theOracle, spoonBoy );
+            makeFriends( merovingian, persephone );
+            makeFriends( merovingian, theKeymaker );
+            makeFriends( merovingian, theTrainman );
 
             // Step Two: create the interests of the people in the graph
-            Node interestInFreedom, interestInThomasAnderson;
-            {
-                /* TODO: Define the interests of the people of "The Matrix".
-                 * Thomas Anderson should have some common interest with both
-                 * Morpheus and Trinity, he should also have a common interest
-                 * with Agent Smith (they are not completely different after
-                 * all...).
-                 * Trinity should be interested in "Thomas Anderson" (an
-                 * interest she shares with Persephone)...
-                 * Cypher should share an interest with Agent Smith that he
-                 * doesn't share with anyone else aboard the Nebuchadnezzar.
-                 */
-            }
-
-            // Step Three: add indexing to persons and interests
-            {
-                /* TODO: index the people and interests of "The Matrix".
-                 * Persons and interests should be indexed in separate indexes.
-                 * All the persons and interests defined above should be
-                 * present in the respective indexes. There should be a few
-                 * people aboard the Nebuchadnezzar that are interested in
-                 * "Freedom".
-                 */
-                // NOTE: also implement lookupPerson and lookupInterest
-            }
+            Node annihilationOfHumans = createInterestNode( "Annihilation of humans" );
+            Node war = createInterestNode( "War" );
+            Node zion = createInterestNode( "Zion" );
+            Node power = createInterestNode( "Power" );
+            Node keys = createInterestNode( "Keys" );
+            Node whiteClothes = createInterestNode( "White clothes" );
+            Node betrayal = createInterestNode( "Betrayal" );
+            Node ignorance = createInterestNode( "Ignorance" );
+            Node understanding = createInterestNode( "Understanding" );
+            Node protection = createInterestNode( "Protection" );
+            Node bendingSpoons = createInterestNode( "Bending spoons" );
+            Node destruction = createInterestNode( "Destruction" );
+            Node freedom = createInterestNode( "Freedom" );
+            Node hacking = createInterestNode( "Hacking" );
+            Node control = createInterestNode( "Control" );
+            Node love = createInterestNode( "Love" );
+            Node theTruth = createInterestNode( "The Truth" );
+            Node illuminati = createInterestNode( "Illuminati" );
+            Node creation = createInterestNode( "Creation" );
+            Node theOne = createInterestNode( "The One" );
+            Node sex = createInterestNode( "Sex" );
+            Node theFuture = createInterestNode( "The future" );
+            // Associate the interests with people
+            addInterest( thomasAnderson, theTruth );
+            addInterest( thomasAnderson, theFuture );
+            addInterest( thomasAnderson, hacking );
+            addInterest( thomasAnderson, understanding );
+            addInterest( trinity, hacking );
+            addInterest( trinity, thomasAnderson );
+            addInterest( morpheus, theTruth );
+            addInterest( morpheus, theOne );
+            addInterest( morpheus, zion );
+            addInterest( morpheus, keys );
+            addInterest( cypher, ignorance );
+            addInterest( cypher, freedom );
+            addInterest( cypher, betrayal );
+            addInterest( apoc, freedom );
+            addInterest( tank, freedom );
+            addInterest( tank, zion );
+            addInterest( dozer, freedom );
+            addInterest( dozer, zion );
+            addInterest( mouse, sex );
+            addInterest( mouse, freedom );
+            addInterest( _switch, freedom );
+            addInterest( _switch, whiteClothes );
+            addInterest( ladyInRed, sex );
+            addInterest( ladyInRed, illuminati );
+            addInterest( kali, love );
+            addInterest( kali, zion );
+            addInterest( zee, zion );
+            addInterest( zee, love );
+            addInterest( niobe, zion );
+            addInterest( niobe, love );
+            addInterest( niobe, war );
+            addInterest( lock, zion );
+            addInterest( lock, war );
+            addInterest( link, zion );
+            addInterest( ghost, zion );
+            addInterest( agentSmith, power );
+            addInterest( agentSmith, control );
+            addInterest( agentSmith, understanding );
+            addInterest( agentSmith, betrayal );
+            addInterest( agentSmith, annihilationOfHumans );
+            addInterest( agentBrown, control );
+            addInterest( agentJones, control );
+            addInterest( persephone, thomasAnderson );
+            addInterest( persephone, understanding );
+            addInterest( spoonBoy, bendingSpoons );
+            addInterest( theOracle, theFuture );
+            addInterest( theOracle, creation );
+            addInterest( theOracle, theOne );
+            addInterest( seraph, protection );
+            addInterest( theArchitect, theFuture );
+            addInterest( theArchitect, creation );
+            addInterest( theArchitect, destruction );
+            addInterest( merovingian, destruction );
+            addInterest( merovingian, power );
+            addInterest( theKeymaker, keys );
+            addInterest( theTrainman, control );
 
             tx.success(); // <- this should always be last in the try-block
         }
@@ -122,6 +239,28 @@ public class TheMatrix
             tx.finish();
         }
         return thomasAnderson;
+    }
+
+    private Node createPersonNode( String name )
+    {
+        // TODO: implement in Step 1, update in Step 3
+        return null;
+    }
+
+    private void makeFriends( Node person1, Node person2 )
+    {
+        // TODO: implement in Step 1, update in Step 3
+    }
+
+    private Node createInterestNode( String interest )
+    {
+        // TODO: implement in Step 2, update in Step 3
+        return null;
+    }
+
+    private void addInterest( Node person, Node interest )
+    {
+        // TODO: implement in Step 2, update in Step 3
     }
 
     /**
