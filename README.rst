@@ -16,6 +16,11 @@ This is  going to be  a hands-on tutorial,  where You are  expected to
 write  code. The source  code provided  with this  tutorial is  a code
 skeleton with blanks that you are expected to fill in.
 
+If you  get stuck  and need  to introspect your  data to  get further,
+check out the `introspection section`_ about the `Neo4j Shell`_.
+
+.. _`introspection section`: shell_
+
 
 Pre requirements
 ================
@@ -191,6 +196,22 @@ yield:
 * On depth 3: Ghost
 * On depth 3: Lock
 * ...
+
+
+.. _shell:
+
+Intermezzo - Introspecting the graph
+====================================
+
+To get a feel for the data you have created (and for debugging, should
+things  go wrong)  Neo4j comes  with a  nifty little  tool  called the
+`Neo4j Shell`_. The  `Neo4j Shell`_ is a Unix  like terminal interface
+for browsing the Neo4j graph.
+
+Take some time  to play around with the  Shell, familiarizing yourself
+with this tool could come in handy in many situations.
+
+.. _`Neo4j Shell`: http://wiki.neo4j.org/content/Shell
 
 
 Step Two - Adding more Relationship types
