@@ -19,6 +19,14 @@ skeleton with blanks that you are expected to fill in.
 If you  get stuck  and need  to introspect your  data to  get further,
 check out the `introspection section`_ about the `Neo4j Shell`_.
 
+To get started with the code, just type:
+
+ git clone http://github.com/thobe/social-network-workshop.git
+
+Or download the tarball version from:
+
+ http://github.com/thobe/social-network-workshop/raw/master/social-network-workshop.tar.gz
+
 .. _`introspection section`: shell_
 
 
