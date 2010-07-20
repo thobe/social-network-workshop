@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns:ivy="antlib:org.apache.ivy.ant"
-         name="social-network" basedir="." default="dist">
+         name="social-network-workshop" basedir="." default="dist">
 
   <property name="ivy.install.version" value="2.1.0" />
   <condition property="ivy.home" value="${env.IVY_HOME}">
@@ -32,15 +32,42 @@
   <property name="target.test" location="${target}/test-classes"/>
   <property name="target.reports" location="${target}/reports"/>
 
+  <available property="dependencies.zip" value="${basedir}/dependencies.zip"
+             file="${basedir}/dependencies.zip"/>
+
   <target name="clean">
     <delete dir="${target}"/>
   </target>
 
-  <target name="dependencies" depends="init ivy">
+  <target name="download dependencies" unless="dependencies.zip"
+          depends="init ivy">
     <ivy:retrieve />
+  </target>
+
+  <target name="unpack dependencies" if="dependencies.zip">
+    <mkdir dir="${basedir}/lib"/>
+    <unzip src="${dependencies.zip}" dest="${basedir}/lib" overwrite="false"/>
+  </target>
+
+  <target name="dependencies"
+          depends="download dependencies,unpack dependencies">
     <path id="dependencies.path">
       <fileset dir="${basedir}/lib" includes="*.jar"/>
     </path>
+  </target>
+
+  <target name="package" depends="dependencies">
+    <mkdir dir="${target}"/>
+    <zip destfile="${target}/dependencies.zip" filesonly="true">
+      <fileset dir="${basedir}/lib" includes="*.jar"/>
+    </zip>
+    <zip destfile="${target}/${ant.project.name}.zip">
+      <fileset dir="${basedir}" includes="src/"/>
+      <fileset dir="${basedir}" includes="doc/"/>
+      <fileset dir="${basedir}" includes="*.xml"/>
+      <fileset dir="${basedir}" includes="README.rst"/>
+      <fileset dir="${target}" includes="dependencies.zip"/>
+    </zip>
   </target>
 
   <target name="compile" depends="dependencies">

@@ -21,11 +21,14 @@ check out the `introspection section`_ about the `Neo4j Shell`_.
 
 To get started with the code, just type:
 
- git clone http://github.com/thobe/social-network-workshop.git
+ git clone git://github.com/thobe/social-network-workshop
 
-Or download the tarball version from:
+Or you could download a pre packaged version:
 
- http://github.com/thobe/social-network-workshop/tarball/master
+* `The entire workshop as a single zip file (including dependencies) <http://github.com/downloads/thobe/social-network-workshop/social-network-workshop.zip>`_
+* `Source tarball <http://github.com/thobe/social-network-workshop/zipball/master>`_
+* `Source zip file <http://github.com/thobe/social-network-workshop/zipball/master>`_
+* `All Dependencies as a zip file <http://github.com/downloads/thobe/social-network-workshop/dependencies.zip>`_
 
 .. _`introspection section`: shell_
 
