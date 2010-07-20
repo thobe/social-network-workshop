@@ -25,7 +25,7 @@ To get started with the code, just type:
 
 Or download the tarball version from:
 
- http://github.com/thobe/social-network-workshop/raw/master/social-network-workshop.tar.gz
+ http://github.com/thobe/social-network-workshop/tarball/master
 
 .. _`introspection section`: shell_
 
