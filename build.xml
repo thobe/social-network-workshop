@@ -65,13 +65,17 @@
     <zip destfile="${target}/dependencies.zip" filesonly="true">
       <fileset dir="${basedir}/lib" includes="*.jar"/>
     </zip>
+    <exec executable="rst2html.py" failifexecutionfails="false"
+          output="${target}/README.html" errorproperty="rst2html.errors">
+      <arg value="${basedir}/README.rst"/>
+    </exec>
+    <echo message="${rst2html.errors}"/>
     <zip destfile="${target}/${ant.project.name}.zip">
       <fileset dir="${basedir}" includes="src/main/"/>
       <fileset dir="${basedir}" includes="src/test/"/>
-      <fileset dir="${basedir}" includes="doc/matrix*.png"/>
       <fileset dir="${basedir}" includes="*.xml"/>
       <fileset dir="${basedir}" includes="README.rst"/>
-      <fileset dir="${target}" includes="readme.html"/>
+      <fileset dir="${target}" includes="README.html"/>
       <fileset dir="${target}" includes="dependencies.zip"/>
     </zip>
   </target>
