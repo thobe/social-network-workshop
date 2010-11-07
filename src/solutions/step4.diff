@@ -1,0 +1,27 @@
+diff --git a/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java b/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
+index 94fd94e..13b1e1c 100644
+--- a/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
++++ b/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
+@@ -3,6 +3,7 @@ package org.neo4j.examples.social.impl;
+ import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.FRIENDS;
+ import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.INTERESTED_IN;
+ 
++import java.util.ArrayList;
+ import java.util.Collection;
+ import java.util.Collections;
+ import java.util.LinkedList;
+@@ -102,8 +103,12 @@ class PersonImpl implements Person
+ 
+     public Collection<Person> getFriends()
+     {
+-        // TODO: implement this in Step four
+-        return Collections.emptySet();
++        List<Person> result = new ArrayList<Person>();
++        for ( Relationship firendship : underlyingNode.getRelationships( FRIENDS ) )
++        {
++            result.add( new PersonImpl( socnet, firendship.getOtherNode( underlyingNode ) ) );
++        }
++        return result;
+     }
+ 
+     public FriendPath getPath( Person other )

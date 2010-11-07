@@ -1,0 +1,53 @@
+diff --git a/src/main/java/org/neo4j/examples/social/TheMatrix.java b/src/main/java/org/neo4j/examples/social/TheMatrix.java
+index 3a0faea..7be14dc 100644
+--- a/src/main/java/org/neo4j/examples/social/TheMatrix.java
++++ b/src/main/java/org/neo4j/examples/social/TheMatrix.java
+@@ -1,8 +1,12 @@
+ package org.neo4j.examples.social;
+ 
++import org.neo4j.graphdb.Direction;
+ import org.neo4j.graphdb.GraphDatabaseService;
+ import org.neo4j.graphdb.Node;
++import org.neo4j.graphdb.ReturnableEvaluator;
++import org.neo4j.graphdb.StopEvaluator;
+ import org.neo4j.graphdb.Transaction;
++import org.neo4j.graphdb.Traverser.Order;
+ import org.neo4j.graphdb.index.Index;
+ import org.neo4j.kernel.EmbeddedGraphDatabase;
+ 
+@@ -252,8 +256,10 @@ public class TheMatrix
+      */
+     public Node createPersonNode( String name )
+     {
+-        // TODO: implement in Step 1, update in Step 3
+-        return null;
++        // TODO: update in Step 3
++        Node person = graphDb.createNode();
++        person.setProperty( PERSON_NAME, name );
++        return person;
+     }
+ 
+     /**
+@@ -266,7 +272,7 @@ public class TheMatrix
+      */
+     public void makeFriends( Node person1, Node person2 )
+     {
+-        // TODO: implement in Step 1
++        person1.createRelationshipTo( person2, SocialNetworkRelationshipTypes.FRIENDS );
+     }
+ 
+     /**
+@@ -278,10 +284,9 @@ public class TheMatrix
+      */
+     public Iterable<Node> getFriendsOfFriends( Node person )
+     {
+-        // TODO: implement in Step 1
+-        // recursively get the friends of the supplied person node (and
+-        // friends of those friends, and so on...)
+-        return null;
++        return person.traverse( Order.DEPTH_FIRST, StopEvaluator.END_OF_GRAPH,
++                ReturnableEvaluator.ALL_BUT_START_NODE, SocialNetworkRelationshipTypes.FRIENDS,
++                Direction.BOTH );
+     }
+ 
+     /**

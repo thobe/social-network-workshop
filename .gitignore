@@ -1,6 +1,7 @@
 *~
 target
 lib
+.shell_history
 .project
 .classpath
 .settings

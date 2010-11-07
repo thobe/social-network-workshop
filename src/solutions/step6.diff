@@ -1,0 +1,42 @@
+diff --git a/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java b/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
+index 94fd94e..d999a6c 100644
+--- a/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
++++ b/src/main/java/org/neo4j/examples/social/impl/PersonImpl.java
+@@ -18,7 +11,10 @@ import java.util.List;
+ import org.neo4j.graphdb.Relationship;
+ import org.neo4j.graphdb.RelationshipType;
+ import org.neo4j.graphdb.Transaction;
++import org.neo4j.graphdb.traversal.TraversalDescription;
++import org.neo4j.helpers.Predicate;
+ import org.neo4j.kernel.Traversal;
++import org.neo4j.kernel.Uniqueness;
+ 
+ class PersonImpl implements Person
+ {
+@@ -127,10 +130,24 @@ class PersonImpl implements Person
+         return path == null ? null : new FriendPathImpl( socnet, path );
+     }
+ 
++    private static final TraversalDescription friendsSuggestion = Traversal.description().relationships(
++            FRIENDS ).breadthFirst().uniqueness( Uniqueness.NODE_GLOBAL ).prune(
++            Traversal.pruneAfterDepth( 2 ) ).filter(
++            new Predicate<Path>()
++            {
++                public boolean accept( Path item )
++                {
++                    return item.length() == 2;
++                }
++            } );
+     public Collection<Person> suggestFriends()
+     {
+-        // TODO: implement this in Step six
+-        return Collections.emptyList();
++        List<Person> result = new ArrayList<Person>();
++        for ( Node node : friendsSuggestion.traverse( underlyingNode ).nodes() )
++        {
++            result.add( new PersonImpl( socnet, node ) );
++        }
++        return result;
+     }
+ 
+     private Node underlyingNodeOf( Person friend )

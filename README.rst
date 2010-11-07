@@ -211,16 +211,71 @@ yield:
 
 .. _shell:
 
-Intermezzo - Introspecting the graph
-====================================
+Intermezzo - Exploring the graph with the Neo4j Shell
+=====================================================
 
 To get a feel for the data you have created (and for debugging, should
 things  go wrong)  Neo4j comes  with a  nifty little  tool  called the
 `Neo4j Shell`_. The  `Neo4j Shell`_ is a Unix  like terminal interface
 for browsing the Neo4j graph.
 
+With  all dependencies  unpacked  in the  lib-directory, starting  the
+Neo4j shell is easy. All you have to type is::
+
+    java -jar lib/neo4j-shell-1.2-1.2.M03.jar -path target/thematrix/
+
+When using maven you would first have to copy all dependencies to a
+common directory::
+
+    mvn dependency:copy-dependencies
+    java -jar target/dependency/neo4j-shell-1.2-1.2.M03.jar -path target/thematrix/
+
 Take some time  to play around with the  Shell, familiarizing yourself
-with this tool could come in handy in many situations.
+with this  tool could come in  handy in many  situations. The ``help``
+command is a good place to start, typing just ``help`` will give you a
+list  of available  commands.   In particular  the  ``cd`` and  ``ls``
+commands  are handy  for walking  around the  graph and  observing its
+structure. Read the help page about ``cd`` to learn how to navigate to
+Nodes and Relationships::
+
+    help cd
+
+At this  point you should be  able to navigate a  structure similar to
+this::
+
+    neo4j-sh (Thomas Anderson,1)$ ls
+    *name =[Thomas Anderson]
+    (me) --<FRIENDS>-> (Trinity,3)
+    (me) --<FRIENDS>-> (Morpheus,2)
+    (me) --<INTERESTED_IN>-> (Understanding,36)
+    (me) --<INTERESTED_IN>-> (Hacking,41)
+    (me) --<INTERESTED_IN>-> (The future,49)
+    (me) --<INTERESTED_IN>-> (The Truth,44)
+    (me) <-<INTERESTED_IN>-- (Persephone,18)
+    (me) <-<INTERESTED_IN>-- (Trinity,3)
+    neo4j-sh (Thomas Anderson,1)$ cd 2
+    neo4j-sh (Morpheus,2)$ ls -v
+    *name =[Morpheus] (String)
+    (me) --<FRIENDS,10>-> (Niobe,17)
+    (me) --<FRIENDS,9>-> (Seraph,19)
+    (me) --<FRIENDS,8>-> (Switch,21)
+    (me) --<FRIENDS,7>-> (Mouse,16)
+    (me) --<FRIENDS,6>-> (Cypher,8)
+    (me) --<FRIENDS,5>-> (Apoc,7)
+    (me) --<FRIENDS,4>-> (Dozer,9)
+    (me) --<FRIENDS,3>-> (Tank,22)
+    (me) --<INTERESTED_IN,52>-> (Keys,32)
+    (me) --<INTERESTED_IN,51>-> (Zion,30)
+    (me) --<INTERESTED_IN,50>-> (The One,47)
+    (me) --<INTERESTED_IN,49>-> (The Truth,44)
+    (me) <-<FRIENDS,2>-- (Trinity,3)
+    (me) <-<FRIENDS,0>-- (Thomas Anderson,1)
+    neo4j-sh (Morpheus,2)$ cd -r 6
+    neo4j-sh <FRIENDS,6>$ ls
+    (Morpheus,2) --<FRIENDS,6>-> (Cypher,8)
+    neo4j-sh <FRIENDS,6>$ cd ..
+    neo4j-sh (Morpheus,2)$ cd ..
+    neo4j-sh (Thomas Anderson,1)$ exit
 
 .. _`Neo4j Shell`: http://wiki.neo4j.org/content/Shell
 

@@ -1,0 +1,35 @@
+diff --git a/src/main/java/org/neo4j/examples/social/TheMatrix.java b/src/main/java/org/neo4j/examples/social/TheMatrix.java
+index 3a0faea..fb86f9f 100644
+--- a/src/main/java/org/neo4j/examples/social/TheMatrix.java
++++ b/src/main/java/org/neo4j/examples/social/TheMatrix.java
+@@ -256,9 +256,9 @@ public class TheMatrix
+      */
+     public Node createPersonNode( String name )
+     {
+-        // TODO: update in Step 3
+         Node person = graphDb.createNode();
+         person.setProperty( PERSON_NAME, name );
++        persons.add( person, PERSON_NAME, name );
+         return person;
+     }
+ 
+@@ -301,9 +301,9 @@ public class TheMatrix
+      */
+     public Node createInterestNode( String interest )
+     {
+-        // TODO: update in Step 3
+         Node interestNode = graphDb.createNode();
+         interestNode.setProperty( "name", interest );
++        interests.add( interestNode, "interest", interest );
+         return interestNode;
+     }
+ 
+@@ -332,7 +332,6 @@ public class TheMatrix
+      */
+     public Node lookupPerson( String name )
+     {
+-        // TODO: implement this in Step 3
+-        return null;
++        return persons.get( PERSON_NAME, name ).getSingle();
+     }
+ }
