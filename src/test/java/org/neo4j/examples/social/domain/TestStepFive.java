@@ -9,6 +9,12 @@ import org.neo4j.examples.social.graphdb.TestNeo4jSocialNetwork;
 
 public class TestStepFive extends TestNeo4jSocialNetwork
 {
+    /**
+     * Make the test pass by implementing this method:
+     * <ul>
+     * <li>{@link Person#getPath(Person)}</li>
+     * </ul>
+     */
     @Test
     public void pathBetweenNeoAndSmithIsFourPersonsLong()
     {

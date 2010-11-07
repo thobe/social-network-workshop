@@ -39,6 +39,10 @@
     <delete dir="${target}"/>
   </target>
 
+  <target name="clean all" depends="clean">
+    <delete dir="${basedir}/lib"/>
+  </target>
+
   <target name="download dependencies" unless="dependencies.zip"
           depends="init ivy">
     <ivy:retrieve />

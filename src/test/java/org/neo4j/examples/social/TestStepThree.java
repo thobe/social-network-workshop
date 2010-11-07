@@ -8,6 +8,17 @@ import org.neo4j.graphdb.Node;
 
 public class TestStepThree extends StepTest
 {
+    /**
+     * Make the test pass by updating these methods:
+     * <ul>
+     * <li>{@link TheMatrix#createPersonNode(String)}</li>
+     * <li>{@link TheMatrix#createInterestNode(String)} (optional)</li>
+     * </ul>
+     * and implementing this method:
+     * <ul>
+     * <li>{@link TheMatrix#lookupPerson(String)}</li>
+     * </ul>
+     */
     @Test
     public void canLookupMrAnderson()
     {
@@ -19,6 +30,16 @@ public class TestStepThree extends StepTest
         testFoaf( neo );
     }
 
+    /**
+     * Make the test pass by implementing this method:
+     * <ul>
+     * <li>{@link TheMatrix#createPersonNode(String)}</li>
+     * </ul>
+     * and updating this method:
+     * <ul>
+     * <li>{@link TheMatrix#lookupPerson(String)}</li>
+     * </ul>
+     */
     @Test
     public void canLookupAgentSmith()
     {

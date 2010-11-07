@@ -14,6 +14,13 @@ import org.neo4j.graphdb.Relationship;
 
 public class TestStepTwo extends StepTest
 {
+    /**
+     * Make the test pass by implementing these methods:
+     * <ul>
+     * <li>{@link TheMatrix#createInterestNode(String)}</li>
+     * <li>{@link TheMatrix#addInterest(Node, Node)}</li>
+     * </ul>
+     */
     @Test
     public void mrAndersonHasCommonInterestsWithMorpheusTrinityAndAgentSmith()
     {

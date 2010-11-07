@@ -11,6 +11,12 @@ import org.neo4j.examples.social.graphdb.TestNeo4jSocialNetwork;
 
 public class TestStepSix extends TestNeo4jSocialNetwork
 {
+    /**
+     * Make the test pass by implementing this method:
+     * <ul>
+     * <li>{@link Person#suggestFriends()}</li>
+     * </ul>
+     */
     @Test
     public void suggestionsDoNotContainPreviousFriends()
     {

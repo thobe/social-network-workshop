@@ -7,6 +7,14 @@ import org.neo4j.graphdb.Node;
 
 public class TestStepOne extends StepTest
 {
+    /**
+     * Make the test pass by implementing these methods:
+     * <ul>
+     * <li>{@link TheMatrix#createPersonNode(String)}</li>
+     * <li>{@link TheMatrix#makeFriends(Node, Node)}</li>
+     * <li>{@link TheMatrix#getFriendsOfFriends(Node)}</li>
+     * </ul>
+     */
     @Test
     public void canGetFriendsOfFriends()
     {

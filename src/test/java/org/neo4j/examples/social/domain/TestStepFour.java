@@ -24,6 +24,12 @@ public class TestStepFour extends TestNeo4jSocialNetwork
                 TheMatrix.AGENT_SMITH ) );
     }
 
+    /**
+     * Make the test pass by implementing this method:
+     * <ul>
+     * <li>{@link Person#getFriends()}</li>
+     * </ul>
+     */
     @Test
     public void canGetFriends() throws Exception
     {

@@ -25,6 +25,9 @@ public class TestDataLoader
         TestUtils.deleteDir( DB_PATH );
     }
 
+    /**
+     * Will pass when {@link org.neo4j.examples.social.domain.TestStepFive} passes.
+     */
     @Test
     public void canLoadTheFlintstones() throws Exception
     {
