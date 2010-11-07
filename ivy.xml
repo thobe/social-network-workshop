@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ivy-module version="2.0">
-    <info organisation="org.neo4j.examples" module="social-network"/>
-    <dependencies>
-        <dependency org="org.neo4j" name="neo4j-kernel" rev="1.1-SNAPSHOT"/>
-        <dependency org="org.neo4j" name="neo4j-index" rev="1.1-SNAPSHOT"/>
-        <dependency org="org.neo4j" name="neo4j-graph-algo" rev="0.6-SNAPSHOT"/>
-        <dependency org="junit" name="junit" rev="4.7"/>
-    </dependencies>
+  <info organisation="org.neo4j.examples" module="social-network"/>
+  <dependencies>
+    <dependency org="org.neo4j" name="neo4j" rev="1.2.M03"/>
+    <dependency org="junit" name="junit" rev="4.7"/>
+  </dependencies>
 </ivy-module>

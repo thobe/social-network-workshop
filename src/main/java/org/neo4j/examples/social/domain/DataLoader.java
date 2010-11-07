@@ -31,9 +31,13 @@ public abstract class DataLoader
             String[] parts = line.trim().split( ";" );
             if ( parts.length != 0 )
             {
+                String command = parts[0].trim().toUpperCase();
                 try
                 {
-                    Command.valueOf( parts[0].trim().toUpperCase() ).dispatch( this, parts );
+                    if ( !"".equals( command ) )
+                    {
+                        Command.valueOf( command ).dispatch( this, parts );
+                    }
                 }
                 catch ( IllegalArgumentException ex )
                 {
