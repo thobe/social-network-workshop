@@ -3,8 +3,7 @@ package org.neo4j.examples.social;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.index.IndexService;
-import org.neo4j.index.lucene.LuceneIndexService;
+import org.neo4j.graphdb.index.Index;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
@@ -34,7 +33,8 @@ public class TheMatrix
     // Internal state of The Matrix
     // - this is all it takes to keep humanity subdued...
     final GraphDatabaseService graphDb;
-    final IndexService indexes;
+    final Index<Node> persons;
+    final Index<Node> interests;
 
     /**
      * This constructor takes care of creating the Neo4j
@@ -45,7 +45,8 @@ public class TheMatrix
     public TheMatrix( String storeDir )
     {
         this.graphDb = new EmbeddedGraphDatabase( storeDir );
-        this.indexes = new LuceneIndexService( graphDb );
+        this.persons = this.graphDb.index().forNodes( "Persons" );
+        this.interests = this.graphDb.index().forNodes( "Interests" );
     }
 
     /**
@@ -53,7 +54,6 @@ public class TheMatrix
      */
     public void shutdown()
     {
-        this.indexes.shutdown();
         this.graphDb.shutdown();
     }
 
@@ -302,9 +302,9 @@ public class TheMatrix
 
     /**
      * Associate a person with an interest.
-     * 
+     *
      * Use the RelationshipTypes from {@link SocialNetworkRelationshipTypes}.
-     * 
+     *
      * @param person the interested person
      * @param interest the interesting node
      */

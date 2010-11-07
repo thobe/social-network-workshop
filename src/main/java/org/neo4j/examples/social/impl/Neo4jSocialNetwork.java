@@ -10,8 +10,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.RelationshipType;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.index.IndexService;
-import org.neo4j.index.lucene.LuceneIndexService;
+import org.neo4j.graphdb.index.Index;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
@@ -23,11 +22,13 @@ public class Neo4jSocialNetwork implements SocialNetwork
     static final String INTEREST = "interest";
     static final String PERSON_NAME = PersonImpl.PERSON_NAME;
     static final String PERSON_INDEX = "person";
+    static final String INTERESTS_INDEX = INTEREST;
     private static final RelationshipType PERSONS_REFERENCE = withName( "PERSONS_REFERENCE" );
     private static final RelationshipType INTEREST_REFERENCE = withName( "INTEREST_REFERENCE" );
     private static final RelationshipType ISA = withName( "IS_A" );
     private final GraphDatabaseService graphDb;
-    private final IndexService indexes;
+    private final Index<Node> persons;
+    private final Index<Node> interests;
     private final Node personRoot;
     private final Node interestRoot;
 
@@ -39,7 +40,8 @@ public class Neo4jSocialNetwork implements SocialNetwork
     public Neo4jSocialNetwork( String storeDir )
     {
         this.graphDb = new EmbeddedGraphDatabase( storeDir );
-        this.indexes = new LuceneIndexService( graphDb );
+        this.persons = this.graphDb.index().forNodes( PERSON_INDEX );
+        this.interests = this.graphDb.index().forNodes( INTERESTS_INDEX );
         this.personRoot = subreference( graphDb.getReferenceNode(), PERSONS_REFERENCE );
         this.interestRoot = subreference( graphDb.getReferenceNode(), INTEREST_REFERENCE );
     }
@@ -76,13 +78,12 @@ public class Neo4jSocialNetwork implements SocialNetwork
 
     public void shutdown()
     {
-        indexes.shutdown();
         graphDb.shutdown();
     }
 
     public Person lookupPerson( String name )
     {
-        Node person = indexes.getSingleNode( PERSON_INDEX, name );
+        Node person = persons.get( PERSON_NAME, name ).getSingle();
         return person == null ? null : new PersonImpl( this, person );
     }
 
@@ -99,6 +100,7 @@ public class Neo4jSocialNetwork implements SocialNetwork
                 throw new IllegalArgumentException( "The person \"" + name + "\" already exists." );
             }
             person.setProperty( PERSON_NAME, name );
+            persons.add( person, PERSON_NAME, name );
             tx.success();
         }
         finally
@@ -115,12 +117,12 @@ public class Neo4jSocialNetwork implements SocialNetwork
 
     Node interestNode( String interest )
     {
-        Node interestNode = indexes.getSingleNode( INTEREST, interest );
+        Node interestNode = interests.get( INTEREST, interest ).getSingle();
         if ( interestNode == null )
         {
             interestNode = graphDb.createNode();
             Relationship isa = interestNode.createRelationshipTo( interestRoot, ISA );
-            Node concurrentNode = indexes.getSingleNode( INTEREST, interest );
+            Node concurrentNode = interests.get( INTEREST, interest ).getSingle();
             if ( concurrentNode != null )
             {
                 isa.delete();
@@ -129,7 +131,7 @@ public class Neo4jSocialNetwork implements SocialNetwork
             }
             else
             {
-                indexes.index( interestNode, INTEREST, interest );
+                interests.add( interestNode, INTEREST, interest );
                 interestNode.setProperty( INTEREST, interest );
             }
         }

@@ -1,5 +1,6 @@
 package org.neo4j.examples.social;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.neo4j.examples.social.SocialNetworkRelationshipTypes.INTERESTED_IN;
 
@@ -18,6 +19,8 @@ public class TestStepTwo extends StepTest
     {
         Set<String> personsWithCommonInterests = new HashSet<String>();
         Node neo = mrAnderson();
+        assertNotNull( "The node retuned by TheMatrix.createSocialNetwork() was null, "
+                       + "the method is probably not implemented.", neo );
         for ( Relationship interest : neo.getRelationships( INTERESTED_IN, Direction.OUTGOING ) )
         {
             for ( Relationship interested : interest.getEndNode().getRelationships( INTERESTED_IN,
