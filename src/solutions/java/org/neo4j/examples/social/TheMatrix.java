@@ -1,13 +1,13 @@
 package org.neo4j.examples.social;
 
 import org.neo4j.graphdb.Direction;
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ReturnableEvaluator;
 import org.neo4j.graphdb.StopEvaluator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.Traverser.Order;
-import org.neo4j.graphdb.index.Index;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
@@ -37,8 +37,6 @@ public class TheMatrix
     // Internal state of The Matrix
     // - this is all it takes to keep humanity subdued...
     final GraphDatabaseService graphDb;
-    final Index<Node> persons;
-    final Index<Node> interests;
 
     /**
      * This constructor takes care of creating the Neo4j
@@ -49,8 +47,6 @@ public class TheMatrix
     public TheMatrix( String storeDir )
     {
         this.graphDb = new EmbeddedGraphDatabase( storeDir );
-        this.persons = this.graphDb.index().forNodes( "Persons" );
-        this.interests = this.graphDb.index().forNodes( "Interests" );
     }
 
     /**
@@ -83,6 +79,8 @@ public class TheMatrix
         {
             // Step One: Create the social graph of friends
             thomasAnderson = createPersonNode( THOMAS_ANDERSON );
+            graphDb.getReferenceNode().createRelationshipTo( thomasAnderson,
+                    DynamicRelationshipType.withName( "THE_ONE" ) );
             Node morpheus = createPersonNode( MORPHEUS );
             Node trinity = createPersonNode( TRINITY );
             Node agentSmith = createPersonNode( AGENT_SMITH );
@@ -258,7 +256,7 @@ public class TheMatrix
     {
         Node person = graphDb.createNode();
         person.setProperty( PERSON_NAME, name );
-        persons.add( person, PERSON_NAME, name );
+        graphDb.index().forNodes( "Persons" ).add( person, PERSON_NAME, name );
         return person;
     }
 
@@ -303,7 +301,7 @@ public class TheMatrix
     {
         Node interestNode = graphDb.createNode();
         interestNode.setProperty( "name", interest );
-        interests.add( interestNode, "interest", interest );
+        graphDb.index().forNodes( "Interests" ).add( interestNode, "interest", interest );
         return interestNode;
     }
 
@@ -332,6 +330,6 @@ public class TheMatrix
      */
     public Node lookupPerson( String name )
     {
-        return persons.get( PERSON_NAME, name ).getSingle();
+        return graphDb.index().forNodes( "Persons" ).get( PERSON_NAME, name ).getSingle();
     }
 }

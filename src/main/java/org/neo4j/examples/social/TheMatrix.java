@@ -1,9 +1,9 @@
 package org.neo4j.examples.social;
 
+import org.neo4j.graphdb.DynamicRelationshipType;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.index.Index;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
 
 /**
@@ -33,8 +33,6 @@ public class TheMatrix
     // Internal state of The Matrix
     // - this is all it takes to keep humanity subdued...
     final GraphDatabaseService graphDb;
-    final Index<Node> persons;
-    final Index<Node> interests;
 
     /**
      * This constructor takes care of creating the Neo4j
@@ -45,8 +43,6 @@ public class TheMatrix
     public TheMatrix( String storeDir )
     {
         this.graphDb = new EmbeddedGraphDatabase( storeDir );
-        this.persons = this.graphDb.index().forNodes( "Persons" );
-        this.interests = this.graphDb.index().forNodes( "Interests" );
     }
 
     /**
@@ -79,6 +75,8 @@ public class TheMatrix
         {
             // Step One: Create the social graph of friends
             thomasAnderson = createPersonNode( THOMAS_ANDERSON );
+            graphDb.getReferenceNode().createRelationshipTo( thomasAnderson,
+                    DynamicRelationshipType.withName( "THE_ONE" ) );
             Node morpheus = createPersonNode( MORPHEUS );
             Node trinity = createPersonNode( TRINITY );
             Node agentSmith = createPersonNode( AGENT_SMITH );

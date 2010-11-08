@@ -26,7 +26,7 @@ To get started with the code, just type:
 Or you could download a pre packaged version:
 
 * `The entire workshop as a single zip file (including dependencies) <http://github.com/downloads/thobe/social-network-workshop/social-network-workshop.zip>`_
-* `Source tarball <http://github.com/thobe/social-network-workshop/zipball/master>`_
+* `Source tarball <http://github.com/thobe/social-network-workshop/tarball/master>`_
 * `Source zip file <http://github.com/thobe/social-network-workshop/zipball/master>`_
 * `All Dependencies as a zip file <http://github.com/downloads/thobe/social-network-workshop/dependencies.zip>`_
 
@@ -39,9 +39,6 @@ Pre requirements
 The first thing you are going to need is a JDK (Java Development Kit),
 you can download this from the `SUN Java website`_.
 
-The second thing  you need is to `download the  source code`_ for this
-tutorial.
-
 While  you could  compile the  sources manually  with just  javac, the
 process becomes  a lot  easier using  a build tool  such as  maven_ or
 ant_.  We  recommend using  maven_ since it  takes care  of dependency
@@ -52,7 +49,7 @@ included an ant  build file for you. The  instructions will talk about
 maven but using ant should be pretty straight forward.
 
 .. _`SUN Java website`: http://java.sun.com/javase/downloads/index.jsp
-.. _`download the source code`: http://github.com/thobe/
+.. _`download the source code`: https://github.com/thobe/social-network-workshop
 .. _maven: http://maven.apache.org/download.html
 .. _ant: http://ant.apache.org/bindownload.cgi
 
@@ -66,12 +63,8 @@ assignment you  will be  able to  build a graph  using the  core Neo4j
 Graph Database API and perform some simple traversals over that graph.
 
 For  resources  for  this  task,  please refer  to  the  `Javadoc  API
-documentation`_ for the Neo4j Graph Database Kernel. The documentation
-about  the `Neo4j  Traversal  Framework`_ on  the  `Neo4j wiki`_  also
-contains  some useful  information for  this task.   The rest  of this
-section will give you an introduction to the core concepts of Neo4j.
-
-The  first interface  you will  make  acquaintance with  is the  Neo4j
+documentation`_  for  the  Neo4j  Graph Database  Kernel.   The  first
+interface   you   will   make   acquaintance   with   is   the   Neo4j
 GraphDatabaseService_. This  is the  main interface through  which you
 access the elements of the  Graph. The standard implementation of this
 interface  embeds_ a Neo4j  Graph database  in your  application. From
@@ -112,9 +105,6 @@ Neo4j to compute information about that social graph.
 .. _`Neo4j Graph Database Kernel`: http://components.neo4j.org/neo4j-kernel/
 .. _`Javadoc API documentation`:
    http://api.neo4j.org/current/index.html?org/neo4j/graphdb/package-summary.html
-.. _`Neo4j wiki`: http://wiki.neo4j.org/
-.. _`Neo4j Traversal Framework`:
-   http://wiki.neo4j.org/content/Traversal_Framework
 .. _GraphDatabaseService:
    http://api.neo4j.org/current/org/neo4j/graphdb/GraphDatabaseService.html
 .. _embeds: http://api.neo4j.org/current/org/neo4j/kernel/EmbeddedGraphDatabase.html
@@ -147,7 +137,7 @@ Neo4j to compute information about that social graph.
 .. _start: http://api.neo4j.org/current/org/neo4j/graphdb/Relationship.html#getStartNode()
 .. _end: http://api.neo4j.org/current/org/neo4j/graphdb/Relationship.html#getEndNode()
 .. _type: http://api.neo4j.org/current/org/neo4j/graphdb/RelationshipType.html
-.. _`determining data types`: http://wiki.neo4j.org/content/ToDo
+.. _`determining data types`: http://wiki.neo4j.org/content/Navigational_Data_Types
 .. _`traversal features`: http://api.neo4j.org/current/org/neo4j/graphdb/Node.html#traverse(org.neo4j.graphdb.Traverser.Order,%20org.neo4j.graphdb.StopEvaluator,%20org.neo4j.graphdb.ReturnableEvaluator,%20java.lang.Object...)
 .. _`The Matrix`: http://www.imdb.com/title/tt0133093/
 
@@ -331,8 +321,9 @@ In  order to  traverse a  graph you  need a  starting  point. Starting
 points are acquired using indexes_ in Neo4j.
 
 More information  about how to use  indexing in Neo4j  is available in
-the `API documentation` and the `Indexing wiki page`. The rest of this
-section will give you an introduction to working with Neo4j indexing.
+the `API  documentation`_ and the  `Indexing wiki page`_. The  rest of
+this  section will  give you  an  introduction to  working with  Neo4j
+indexing.
 
 Indexing in Neo4j is done  explicitly and programatically. It is up to
 you as a developer to index nodes when they are created, and to update
@@ -355,34 +346,26 @@ relationships the node,  it could be aggregated from  other nodes that
 are related to the node, it could even be an arbitrary value.
 
 The main  interface through which  indexing is managed is  accessed is
-the IndexService_. The recommended implementation of this interface is
-the one that is `based on lucene`_. For creating index entries use the
-`index  method`_. Updating  an index  entry is  done by  `removing the
-current index entry`_, then creating  a new.  There are two methods in
-IndexService_ for  accessing indexed nodes. One method  is for getting
-`all indexed nodes`_ that matches the index query, the other method is
-a convenience method for when  the node is `uniquely indexed`_. A node
-being uniquely indexed  means that there is at most  one node with the
-given index entry.
+the IndexManager_, this object is accessed `through the Graph Database
+interface`_.  The IndexManager_ is used to `retrieve index instances`_
+that are then used for  associating Nodes and relationships with index
+entries. The  recommended pattern is to  have one index  for each data
+type,  so that  all Nodes  or  Relationships in  one index  represents
+entities of the  same type. Each index can  contain multiple key/value
+entries for each entity.
 
-An entry in  an index is (as  seen in the `index method`_)  made up of
-not only a Node, but also a key  and a value. For the key it is common
-to use  the key of  the property being  indexed, but with  some slight
-modification.   Neo4j does not  have any  types for  nodes, but  it is
-likely  that your  application  uses nodes  to  represent entities  of
-various types. It is also quite common for entities of different types
-to have  properties with the  same key, and  that is where  the slight
-modification  of the key  for indexing  comes into  play. It  is often
-important  for the application  to know  the type  of the  entity it's
-looking up, so for properties  that are shared among multiple kinds of
-nodes, the key  used in the index should be specific  to that type. If
-your application  for example  represents both persons  and companies,
-both of these entities might have  a name property that you would like
-to be  able to use for  lookup. Then you  could let the index  key for
-indexing  the name  of  a person  be  "person name"  and  the key  for
-indexing the  name of a company be  "company name". Or -  if those are
-the only  indexes for these  entity types -  the keys for  the indexes
-could simply be "person" and "company" respectively.
+Creating an index  entry is done using the  `add method`_. Updating an
+index  entry is  done by  `removing  the current  index entry`_,  then
+creating  a new.  There  are two  methods in  an Index_  for accessing
+indexed nodes.  One method for doing `exact lookup`_ and one for doing
+more `complex queries`_. Both of these methods return an iterator over
+all  matching  entries. For  uniquely  indexed  entities the  returned
+iterator has a `convenience method`_ for accessing the single matching
+entity.
+
+An entry in an index is (as  seen in the `add method`_) made up of not
+only a Node, but  also a key and a value. For the  key it is common to
+use  the key  of  the property  being  indexed.
 
 In  this task  you will  use the  indexing features  for Neo4j  to add
 lookup  capabilities   for  persons   and  interests  in   the  social
@@ -390,23 +373,27 @@ network. The goal is to be able  to look up persons by their name, and
 to be  able to look up  the identifier nodes based  on its identifying
 text representation.
 
-.. _indexes: http://components.neo4j.org/neo4j-index
+.. _indexes: http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html
+.. _Index: http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html
 .. _`API documentation`:
-   http://api.neo4j.org/current/index.html?org/neo4j/index/package-summary.html
-.. _`Indexing wiki page`:
-   http://wiki.neo4j.org/content/Indexing_with_IndexService
-.. _IndexService: http://api.neo4j.org/current/org/neo4j/index/IndexService.html
-.. _`based on lucene`:
-   http://api.neo4j.org/current/org/neo4j/index/lucene/LuceneIndexService.html
-.. _`index method`:
-   http://api.neo4j.org/current/org/neo4j/index/IndexService.html#index(org.neo4j.graphdb.Node,%20java.lang.String,%20java.lang.Object)
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/package-summary.html
+.. _`Indexing wiki page`: http://wiki.neo4j.org/content/Index_Framework
+.. _IndexManager:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/IndexManager.html
+.. _`through the Graph Database interface`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/GraphDatabaseService.html#index()
+.. _`retrieve index instances`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/IndexManager.html#forNodes(java.lang.String)
+.. _`add method`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html#add(T,%20java.lang.String,%20java.lang.Object)
 .. _`removing the current index entry`:
-   http://api.neo4j.org/current/org/neo4j/index/IndexService.html#removeIndex(org.neo4j.graphdb.Node,%20java.lang.String,%20java.lang.Object)
-.. _`all indexed nodes`:
-   http://api.neo4j.org/current/org/neo4j/index/IndexService.html#getNodes(java.lang.String,%20java.lang.Object)
-.. _`uniquely indexed`:
-   http://api.neo4j.org/current/org/neo4j/index/IndexService.html#getSingleNode(java.lang.String,%20java.lang.Object)
-
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html#remove(T,%20java.lang.String,%20java.lang.Object)
+.. _`exact lookup`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html#get(java.lang.String,%20java.lang.Object)
+.. _`complex queries`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/Index.html#query(java.lang.String,%20java.lang.Object)
+.. _`convenience method`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/index/IndexHits.html#getSingle()
 
 Tasks
 -----
@@ -507,7 +494,8 @@ class`_.
    http://components.neo4j.org/neo4j-graph-algo/
 .. _`available online`:
    http://components.neo4j.org/neo4j-graph-algo/apidocs/index.html
-.. _`new traversal features`: `Neo4j traversal framework`_
+.. _`new traversal features`:
+   http://wiki.neo4j.org/content/Traversal_Framework
 .. _`Neo4j version 1.1`:
    http://components.neo4j.org/neo4j-kernel/apidocs/index.html
 .. _PathFinder:
@@ -546,6 +534,14 @@ recommendation algorithm for this.  The algorithm you are to implement
 for making friend suggestions is  simply based on finding persons that
 have the same interests and recommending them to one another.
 
+One good starting point  for creating simple recommendation algorithms
+is the `new traversal API`_ that was introduced in Neo4j 1.1. This API
+is built  around the concept of  ``TraversalDescription`` objects that
+describe how a  traversal is to be performed. The  `Wiki page`_ does a
+good    job    in    describing    the   different    parts    of    a
+``TraversalDescription``. For creating ``TraversalDescriptions`` Neo4j
+provides a `static factory method`.
+
 Tasks
 -----
 * All code for this task is located in
@@ -563,3 +559,10 @@ Tasks
 
 .. _`src/test/java/org/neo4j/examples/social/domain/TestStepSix.java`:
    http://github.com/thobe/social-network-workshop/blob/master/src/test/java/org/neo4j/examples/social/domain/TestStepSix.java
+.. _`new traversal API`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/graphdb/traversal/TraversalDescription.html
+.. _`Wiki page`:
+   http://wiki.neo4j.org/content/Traversal_Framework
+.. _`static factory method`:
+   http://components.neo4j.org/neo4j-kernel/apidocs/org/neo4j/kernel/Traversal.html#description()
+   
