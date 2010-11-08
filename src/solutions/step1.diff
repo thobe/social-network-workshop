@@ -16,7 +16,7 @@ index 3a0faea..7be14dc 100644
  import org.neo4j.kernel.EmbeddedGraphDatabase;
  
  /**
-@@ -250,8 +254,10 @@ public class TheMatrix
+@@ -251,8 +255,10 @@ public class TheMatrix
       */
      public Node createPersonNode( String name )
      {
@@ -29,7 +29,7 @@ index 3a0faea..7be14dc 100644
      }
  
      /**
-@@ -264,7 +269,7 @@ public class TheMatrix
+@@ -265,7 +270,7 @@ public class TheMatrix
       */
      public void makeFriends( Node person1, Node person2 )
      {
@@ -38,7 +38,7 @@ index 3a0faea..7be14dc 100644
      }
  
      /**
-@@ -276,10 +282,9 @@ public class TheMatrix
+@@ -277,10 +283,9 @@ public class TheMatrix
       */
      public Iterable<Node> getFriendsOfFriends( Node person )
      {

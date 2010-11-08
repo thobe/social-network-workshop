@@ -75,8 +75,9 @@ public class TheMatrix
         {
             // Step One: Create the social graph of friends
             thomasAnderson = createPersonNode( THOMAS_ANDERSON );
-            graphDb.getReferenceNode().createRelationshipTo( thomasAnderson,
-                    DynamicRelationshipType.withName( "THE_ONE" ) );
+            if ( thomasAnderson != null )
+                graphDb.getReferenceNode().createRelationshipTo( thomasAnderson,
+                        DynamicRelationshipType.withName( "THE_ONE" ) );
             Node morpheus = createPersonNode( MORPHEUS );
             Node trinity = createPersonNode( TRINITY );
             Node agentSmith = createPersonNode( AGENT_SMITH );

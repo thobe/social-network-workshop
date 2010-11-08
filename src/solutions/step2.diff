@@ -2,7 +2,7 @@ diff --git a/src/main/java/org/neo4j/examples/social/TheMatrix.java b/src/main/j
 index 3a0faea..db1c101 100644
 --- a/src/main/java/org/neo4j/examples/social/TheMatrix.java
 +++ b/src/main/java/org/neo4j/examples/social/TheMatrix.java
-@@ -299,8 +299,10 @@ public class TheMatrix
+@@ -300,8 +300,10 @@ public class TheMatrix
       */
      public Node createInterestNode( String interest )
      {
@@ -15,7 +15,7 @@ index 3a0faea..db1c101 100644
      }
  
      /**
-@@ -313,7 +316,7 @@ public class TheMatrix
+@@ -314,7 +317,7 @@ public class TheMatrix
       */
      public void addInterest( Node person, Node interest )
      {

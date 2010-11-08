@@ -2,7 +2,7 @@ diff --git a/src/main/java/org/neo4j/examples/social/TheMatrix.java b/src/main/j
 index 3a0faea..fb86f9f 100644
 --- a/src/main/java/org/neo4j/examples/social/TheMatrix.java
 +++ b/src/main/java/org/neo4j/examples/social/TheMatrix.java
-@@ -254,9 +254,9 @@ public class TheMatrix
+@@ -255,9 +255,9 @@ public class TheMatrix
       */
      public Node createPersonNode( String name )
      {
@@ -13,7 +13,7 @@ index 3a0faea..fb86f9f 100644
          return person;
      }
  
-@@ -299,9 +299,9 @@ public class TheMatrix
+@@ -300,9 +300,9 @@ public class TheMatrix
       */
      public Node createInterestNode( String interest )
      {
@@ -24,7 +24,7 @@ index 3a0faea..fb86f9f 100644
          return interestNode;
      }
  
-@@ -330,7 +330,6 @@ public class TheMatrix
+@@ -331,7 +331,6 @@ public class TheMatrix
       */
      public Node lookupPerson( String name )
      {
